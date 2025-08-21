@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+sqlalchemy
+pytz
+python-multipart
+aiofiles
+httpx
+pytest
