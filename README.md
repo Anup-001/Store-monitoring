@@ -53,7 +53,7 @@ Sample report CSVs are available in the `reports/` folder. Each file is named by
 - Dockerize the application for easier deployment
 
 ## Demo
-A demo video showing the full flow is available [here](#) (add your Loom/YouTube link).
+
 
 ## License
 This project is licensed under the MIT License.
