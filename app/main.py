@@ -43,19 +43,21 @@ def trigger_report(background_tasks: BackgroundTasks):
 
 @app.get("/get_report")
 def get_report(report_id: str):
-    db = SessionLocal()
-    report = db.query(ReportStatus).filter_by(report_id=report_id).first()
-    if not report:
-        return {"error": "Invalid report_id"}
-    
-    if report.status == "Running":
-        return {"status": "Running"}
-    
+    # If the report file exists, return it immediately
     file_path = os.path.join("reports", f"{report_id}.csv")
     if os.path.exists(file_path):
         return FileResponse(file_path, media_type='text/csv', filename=f"{report_id}.csv")
-    else:
-        return {"error": "Report file missing"}
+
+    # Otherwise, check the database for the report status
+    db = SessionLocal()
+    report = db.query(ReportStatus).filter_by(report_id=report_id).first()
+
+    # If the report is unknown or still running, return a non-error status
+    if not report or report.status == "Running":
+        return {"status": "Running"}
+
+    # If the report indicates completion but the file is missing, treat as still processing
+    return {"status": "Running"}
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Store Monitoring API!"}
