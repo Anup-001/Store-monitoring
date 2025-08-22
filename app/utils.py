@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 def load_from_external_db(db):
     try:
-        store_status_chunks = pd.read_csv('data/store_status.csv', chunksize=10000)
+        store_status_chunks = pd.read_csv('data/store_status1.5.csv', chunksize=10000)
         business_hours_df = pd.read_csv('data/menu_hours.csv')
         timezones_df = pd.read_csv('data/timezones.csv')
 

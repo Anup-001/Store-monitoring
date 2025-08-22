@@ -1,5 +1,4 @@
-
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta, time, UTC
 from typing import Dict, Iterable, List, Tuple
 import os
 
@@ -69,7 +68,7 @@ def _get_current_time_utc(db: SessionLocal) -> datetime:
     max_ts: datetime = db.query(func.max(StoreStatus.timestamp_utc)).scalar()  # type: ignore
     if max_ts is None:
         # Fallback to now if no data
-        return datetime.utcnow()
+        return datetime.now(UTC)
     return max_ts
 
 
