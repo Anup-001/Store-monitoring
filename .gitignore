@@ -1,0 +1,4 @@
+*.pytest_cache/
+./app/__pycache__/
+.store_monitoring.db
+.data/store_status.db
